@@ -4,6 +4,7 @@ import QRCode from 'qrcode';
 import QrReader from 'react-qr-reader';
 
 
+
 function App() { 
   const [text, setText] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -11,6 +12,8 @@ function App() {
   const [scanResultWebCam, setScanResultWebCam] =  useState('');
   const classes = useStyles();
   const qrRef = useRef(null);
+
+
 
 
   const generateQrCode = async () => {
@@ -26,7 +29,7 @@ function App() {
   }
   const handleScanFile = (result) => {
       if (result) {
-          setScanResultFile(result);
+          setScanResultFile(result.slice(12,25));
       }
   }
   const onScanFile = () => {
@@ -43,10 +46,10 @@ function App() {
   return (
     <Container className={classes.conatiner}>
           <Card>
-              <h2 className={classes.title}>Generate Download & Scan QR Code with React js</h2>
+              <h2 className={classes.title}> Scan CNIC</h2>
               <CardContent>
                   <Grid container spacing={2}>
-                      <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+                      {/* <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
                           <TextField label="Enter Text Here" onChange={(e) => setText(e.target.value)}/>
                           <Button className={classes.btn} variant="contained" 
                             color="primary" onClick={() => generateQrCode()}>Generate</Button>
@@ -57,7 +60,7 @@ function App() {
                               <a href={imageUrl} download>
                                   <img src={imageUrl} alt="img"/>
                               </a>) : null}
-                      </Grid>
+                      </Grid> */}
                       <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
                         <Button className={classes.btn} variant="contained" color="secondary" onClick={onScanFile}>Scan Qr Code</Button>
                         <QrReader
@@ -78,7 +81,15 @@ function App() {
                          onError={handleErrorWebCam}
                          onScan={handleScanWebCam}
                          />
-                         <h3>Scanned By WebCam Code: {scanResultWebCam}</h3>
+                         <h3>Scanned By WebCam Code: {scanResultWebCam.slice(12,25)}</h3>
+
+                      </Grid>
+                      <Grid item xl={4} lg={4} md={6} sm={12} xs={12}>
+                      
+                      <h1>Immunity Card</h1>
+
+                      
+        
                       </Grid>
                   </Grid>
               </CardContent>
